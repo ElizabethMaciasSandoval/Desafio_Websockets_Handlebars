@@ -1,0 +1,38 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center">Listado de Productos Ingresados</h1>
+    </div>
+    <div class="col-12">
+      {{#if products}}
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Poducto</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Stock</th>
+              <th scope="col">Categoría</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each products}}
+              <tr>
+                <th scope="row">{{id}}</th>
+                <td>{{title}}</td>
+                <td>{{description}}</td>
+                <td>{{price}}</td>
+                <td>{{stock}}</td>
+                <td>{{category}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{else }}
+        <p class="text-danger text-center">No hay productos</p>
+      {{/if}}
+    </div>
+  </div>
+</div>
