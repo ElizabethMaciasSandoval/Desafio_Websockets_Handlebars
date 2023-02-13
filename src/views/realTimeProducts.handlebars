@@ -1,1 +1,135 @@
-<h1>Pagina en construcción</h1>
+
+<div class="container">
+  <div class="row">
+    {{!-- listado de productos en tiempo real --}}
+    <div class="col-12">
+      <h1 class="text-center">Listado de Productos Ingresados en Tiempo Real</h1>
+    </div>
+    <div class="col-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Poducto</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Categoría</th>
+          </tr>
+        </thead>
+        <tbody id="tableProducts"></tbody>
+      </table>
+      <div id="noProducts" class="text-danger text-center"></div>
+    </div>
+    {{!-- formulario para ingresar un producto --}}
+    <div class="col-12">
+      <h1 class="text-center">Ingresa un producto</h1>
+    </div>
+    <div class="col-12">
+      <form id="formCreateProduct">
+        <div class="m-3">
+          <label for="title">Nombre</label>
+          <input 
+            id="title" 
+            class="form-control"
+            type="text" 
+            name="title" 
+            placeholder="Ingresa el nombre del producto"
+            required
+          >
+        </div>
+        <div class="m-3">
+          <label for="description">Descripción</label>
+          <input 
+            id="description" 
+            class="form-control"
+            type="text" 
+            name="description" 
+            placeholder="Ingresa la descrición del producto"
+            required
+          >
+        </div>
+        <div class="m-3">
+          <label for="price">Precio</label>
+          <input 
+            id="price" 
+            class="form-control"
+            type="number" 
+            name="price" 
+            placeholder="Ingresa el precio del producto"
+            required
+          >
+        </div>
+        <div class="m-3">
+          <label for="status">Estado</label>
+          <select id="status" class="form-select" required>
+            <option selected>selecciona una opción</option>
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </select>
+        </div>
+        <div class="m-3">
+          <label for="stock">Stock</label>
+          <input 
+            id="stock" 
+            class="form-control"
+            type="number" 
+            name="stock" 
+            placeholder="Ingresa el stock del producto"
+            required
+          >
+        </div>
+        <div class="m-3">
+          <label for="category">Categoría</label>
+          <input 
+            id="category" 
+            class="form-control"
+            type="text" 
+            name="category" 
+            placeholder="Ingresa la categoría del producto"
+            required
+          >
+        </div>
+        <div class="m-3">
+          <label for="thumbnails">Imagenes</label>
+          <input 
+            id="thumbnails" 
+            class="form-control"
+            type="text" 
+            name="thumbnails" 
+            placeholder="Ingresa las urls de las imagenes del producto separadas por un espacio"
+            required
+          >
+        </div>
+        <div class="m-3">
+          <input type="submit" class="btn btn-info" value="agregar">
+        </div>
+      </form>
+    </div>
+  </div>
+  {{!-- formulario para eliminar un producto --}}
+  <div class="col-12">
+    <h1 class="text-center">Elimina un producto</h1>
+  </div>
+  <div class="col-12">
+    <form id="formDeleteProduct">
+      <div class="m-3">
+        <label for="id">ID</label>
+        <input 
+          id="idProduct" 
+          class="form-control"
+          type="text" 
+          name="idProduct" 
+          placeholder="Ingresa el ID del producto"
+          required
+        >
+      </div>
+      <div class="m-3">
+        <input type="submit" class="btn btn-danger" value="eliminar">
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/client.js"></script>

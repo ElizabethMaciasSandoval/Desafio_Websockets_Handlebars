@@ -10,6 +10,6 @@ router.get('/', async (req, res) => {
   res.render('index.handlebars', { products })
   })
 
-router.get('/realtimeproducts', (req, res) => {
+router.get('/realtimeproducts', async (req, res) => {
   res.render('realTimeProducts.handlebars', {})
 })
