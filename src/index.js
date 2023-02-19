@@ -18,7 +18,7 @@ app.set('views', __dirname + '/views')
 routes(app)
 
 mongoose.set('strictQuery', false)
-mongoose.connect('mongodb+srv://admin:admin@coderbackend.ffbnnla.mongodb.net/?retryWrites=true&w=majority', error => {
+mongoose.connect('mongodb+srv://admin:admin@coderbackend.ffbnnla.mongodb.net/ecommerce?retryWrites=true&w=majority', error => {
   if (error) {
     console.log(`Cannot connect to db. Error ${error}`);
   } else {

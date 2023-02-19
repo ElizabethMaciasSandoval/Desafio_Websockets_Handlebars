@@ -40,7 +40,7 @@ export class ProductManager {
     try {
       let data = await fs.promises.readFile(this.path, 'utf-8');
       data = JSON.parse(data);
-      data = data.find(element => element.id === idProduct);
+      data = data.find(element => element.id === Number(idProduct));
       return data;
     } catch (error) {
       console.log(error);
@@ -51,7 +51,7 @@ export class ProductManager {
     try {
       let data = await fs.promises.readFile(this.path, 'utf-8');
       data = JSON.parse(data);
-      const index = data.findIndex(product => product.id == id);
+      const index = data.findIndex(product => product.id === Number(id));
       data[index] = {
         ...data[index],
         ...product
@@ -66,7 +66,7 @@ export class ProductManager {
     try {
       let data = await fs.promises.readFile(this.path, 'utf-8');
       data = JSON.parse(data);
-      data = data.filter(element => element.id != id);
+      data = data.filter(element => element.id != Number(id));
       await fs.promises.writeFile(this.path, JSON.stringify(data))
     } catch (error) {
       console.log(error);

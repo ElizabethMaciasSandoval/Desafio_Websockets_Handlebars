@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { ProductManager } from "../DAO/FileSystem/ProductManager.js";
+//import { ProductManager } from "../DAO/FileSystem/ProductManager.js";
+import { ProductManager } from "../DAO/MongoDB/ProductManager.js";
 
 export const productsController = Router();
 
@@ -18,7 +19,7 @@ productsController.get('/', async (req, res) => {
 
 productsController.get('/:id', async (req, res) => {
   const { id } = req.params;
-  const productById = await manager.getProductById(Number(id));
+  const productById = await manager.getProductById(id);
   if (!productById) {
     return res.status(404).json({status:`product with id ${id} not found`})
   }
@@ -62,6 +63,6 @@ productsController.put('/:id', async (req, res) => {
 
 productsController.delete('/:id', async (req, res) => {
   const { id } = req.params;
-  await manager.deleteProduct(Number(id));
+  await manager.deleteProduct(id);
   return res.status(200).json({status: 'product removed successfully'});
 })
