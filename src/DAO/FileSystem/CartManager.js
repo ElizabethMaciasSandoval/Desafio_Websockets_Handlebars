@@ -35,7 +35,7 @@ export class CartManager {
     try {
       let data = await fs.promises.readFile(this.path, 'utf-8');
       data = JSON.parse(data);
-      let cart = data.find(cart => cart.cid === cid);
+      let cart = data.find(cart => cart.cid === Number(cid));
       return cart.products;
     } catch (error) {
       console.log(error);
@@ -46,7 +46,7 @@ export class CartManager {
     try {
       let data = await fs.promises.readFile(this.path, 'utf-8');
       data = JSON.parse(data);
-      const indexCart = data.findIndex(cart => cart.cid == cid);
+      const indexCart = data.findIndex(cart => cart.cid == Number(cid));
       const cartProducts = data[indexCart].products;
       if (cartProducts.length === 0) {
         const product = {
@@ -55,7 +55,7 @@ export class CartManager {
         }
         data[indexCart].products.push(product)
       }else{
-        const pidExists = data[indexCart].products.find(product => product.pid === pid);
+        const pidExists = data[indexCart].products.find(product => product.pid === Number(pid));
         if(pidExists === undefined){
           const newProduct = {
             pid,
@@ -64,7 +64,7 @@ export class CartManager {
           data[indexCart].products.push(newProduct)
         }
         data[indexCart].products.forEach(product => {
-          if (product.pid === pid) {
+          if (product.pid === Number(pid)) {
             product.quantity += 1
           }
         });

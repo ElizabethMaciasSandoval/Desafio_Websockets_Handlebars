@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { CartManager } from "../DAO/FileSystem/CartManager.js";
-//import { CartManager } from "../DAO/MongoDB/CartManager.js";
+//import { CartManager } from "../DAO/FileSystem/CartManager.js";
+import { CartManager } from "../DAO/MongoDB/CartManager.js";
 
 export const cartsController = Router();
 
@@ -13,7 +13,7 @@ cartsController.post('/', async (req, res) => {
 
 cartsController.get('/:cid', async (req, res) => {
   const { cid } = req.params;
-  const products = await manager.getProductsByCartId(Number(cid));
+  const products = await manager.getProductsByCartId(cid);
   if(!products){
     return res.status(404).json({status:`cart with id ${cid} not found`})
   }
@@ -22,10 +22,10 @@ cartsController.get('/:cid', async (req, res) => {
 
 cartsController.post('/:cid/product/:pid', async (req, res) => {
   const { cid, pid } = req.params;
-  const products = await manager.getProductsByCartId(Number(cid));
+  const products = await manager.getProductsByCartId(cid);
   if(!products){
     return res.status(404).json({status:`cart with id ${cid} not found`})
   }
-  await manager.addProductByCartId(Number(cid), Number(pid))
+  await manager.addProductByCartId(cid, pid)
   res.status(200).json({status: 'product added successfully'})
 })

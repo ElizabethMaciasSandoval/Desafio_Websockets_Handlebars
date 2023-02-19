@@ -10,7 +10,7 @@ socket.on('menssageServerProducts:', data => {
     data.forEach(element => {
       tableProducts.innerHTML += ` 
       <tr>
-      <th scope="row">${element.id}</th>
+      <th scope="row">${element._id || element.id}</th>
       <td>${element.title}</td>
       <td>${element.description}</td>
       <td>${element.price}</td>
@@ -57,8 +57,8 @@ const formDeleteProduct = document.getElementById('formDeleteProduct');
 formDeleteProduct.addEventListener('submit', event =>{
   event.preventDefault()
   const idProduct = document.getElementById('idProduct').value;
-  const idProductParse = Number(idProduct);
-
+  const idProductParse = idProduct;
+  
   socket.emit('messageClientDeleteProduct:', idProductParse)
 })
 
