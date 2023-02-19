@@ -1,5 +1,6 @@
 import express from "express";
 import handlebars from "express-handlebars";
+import mongoose from "mongoose";
 import { dirname } from "path";
 import { fileURLToPath } from 'url';
 import { routes } from "./router/router.js";
@@ -15,3 +16,12 @@ app.engine('handlebars', handlebars.engine())
 app.set('views', __dirname + '/views')
 
 routes(app)
+
+mongoose.set('strictQuery', false)
+mongoose.connect('mongodb+srv://admin:admin@coderbackend.ffbnnla.mongodb.net/?retryWrites=true&w=majority', error => {
+  if (error) {
+    console.log(`Cannot connect to db. Error ${error}`);
+  } else {
+    console.log('DB connected successfully');
+  }
+})
