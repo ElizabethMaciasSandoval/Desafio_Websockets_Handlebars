@@ -15,7 +15,7 @@ export class CartManager {
 
   async getProductsByCartId (cid){
     try {
-      const cart = await Cart.findOne({_id:cid});
+      const cart = await Cart.findOne({_id:cid}).populate('products.product');
       return cart.products;
     } catch (error) {
       console.log(error);
@@ -27,24 +27,25 @@ export class CartManager {
       const cart = await Cart.findOne({_id:cid});
       if (cart.products.length === 0) {
         const product = {
-          pid: Number(pid),
+          product: pid,
           quantity: 1
         }
         cart.products.push(product)
       } else {
-        const pidExists = cart.products.find(product => product.pid === Number(pid));
+        const pidExists = cart.products.find(product => product.product == pid);
         if (pidExists === undefined || pidExists === null) {
           const newProduct = {
-            pid: Number(pid),
+            product: pid,
             quantity: 1
           }
           cart.products.push(newProduct)
+        }else{
+          cart.products.forEach(product => {
+            if (product.product == pid) {
+              product.quantity += 1
+            }
+          })
         }
-        cart.products.forEach(product => {
-          if (product.pid === Number(pid)) {
-            product.quantity += 1
-          }
-        })
       }
       await Cart.findOneAndUpdate({_id: cid}, cart)
     } catch (error) {
